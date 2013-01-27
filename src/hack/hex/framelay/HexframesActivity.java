@@ -1,16 +1,16 @@
 package hack.hex.framelay;
 
 import android.app.Activity;
-import android.app.AlertDialog;
-import android.content.DialogInterface;
+//import android.app.AlertDialog;
+//import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.Color;
+//import android.graphics.Color;
 import android.os.Bundle;
-import android.os.Handler;
+//import android.os.Handler;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.ScrollView;
+//import android.widget.LinearLayout;
+//import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -43,7 +43,7 @@ public class HexframesActivity extends Activity {
 		cell1 = position / 7;
 		cell2 = position % 7;
 		v = (ImageView) findViewById(imd);
-		TextView tv = (TextView) findViewById(R.id.tv1);
+		//TextView tv = (TextView) findViewById(R.id.tv1);
 		if (finished == 0) {
 			if (board[cell1][cell2] == 0) {
 				if (move % 2 == 0) {
@@ -62,7 +62,17 @@ public class HexframesActivity extends Activity {
 				int p2 = move;
 				p2 = move % 2;
 				p2 = p2 + 1;
-				tv.setText("Player " + p2 + "'s move");
+				changeTop(vi, p2);
+				/*tv.setText("Player " + p2 + "'s move");
+				ImageView top;
+				top = (ImageView) findViewById(R.id.top);
+				if(p2 == 1){
+					top.setImageResource(R.drawable.hex1);
+				}
+				else{
+					top.setImageResource(R.drawable.hex2);
+				}*/
+					
 				// Toast.makeText( getApplicationContext(), "Box chosen is " +
 				// String.valueOf(position) + " on move " +
 				// String.valueOf(move),
@@ -77,7 +87,18 @@ public class HexframesActivity extends Activity {
 	int done;
 	int lastmove;
 	View v2;
-
+	
+	public void changeTop(View v, int p2){
+		ImageView top;
+		top = (ImageView) findViewById(R.id.top);
+		if(p2 == 1){
+			top.setImageResource(R.drawable.hex1);
+		}
+		else{
+			top.setImageResource(R.drawable.hex2);
+		}
+	}
+	
 	public void undo(View v) {
 		if(finished==0){
 		if (undo == 1) {
@@ -93,8 +114,10 @@ public class HexframesActivity extends Activity {
 			int p2;
 			p2 = move % 2;
 			p2 = p2 + 1;
-			TextView tv = (TextView) findViewById(R.id.tv1);
+			/*TextView tv = (TextView) findViewById(R.id.tv1);
 			tv.setText("Player " + p2 + "'s move");
+			ImageView top = (ImageView) findViewById(R.id.top);*/
+			changeTop(v, p2);
 			undo--;
 		} else if (move == 0) {
 			Toast.makeText(getApplicationContext(), "Game yet to begin",
@@ -173,6 +196,7 @@ public class HexframesActivity extends Activity {
 		finished = 1;
 	}
 
+	@SuppressWarnings("unused")
 	private void restartFirstActivity2() {
 
 		Intent i = getBaseContext().getPackageManager()
